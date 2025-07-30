@@ -1,4 +1,4 @@
-module github.com/raghv-gkmit/go-proto-buf
+module github.com/raghav-gkmit/go-proto-buf
 
 go 1.23.7
 
