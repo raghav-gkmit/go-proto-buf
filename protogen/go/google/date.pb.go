@@ -21,11 +21,12 @@
 package google
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -52,14 +53,14 @@ type Date struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without
 	// a year.
-	Year int32 `protobuf:"varint,1,opt,name=year,proto3" json:"year,omitempty"`
+	Year int32 `                   protobuf:"varint,1,opt,name=year,proto3"  json:"year,omitempty"`
 	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a
 	// month and day.
-	Month int32 `protobuf:"varint,2,opt,name=month,proto3" json:"month,omitempty"`
+	Month int32 `                   protobuf:"varint,2,opt,name=month,proto3" json:"month,omitempty"`
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0
 	// to specify a year by itself or a year and month where the day isn't
 	// significant.
-	Day           int32 `protobuf:"varint,3,opt,name=day,proto3" json:"day,omitempty"`
+	Day           int32 `                   protobuf:"varint,3,opt,name=day,proto3"   json:"day,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -133,15 +134,23 @@ var (
 
 func file_proto_google_type_date_proto_rawDescGZIP() []byte {
 	file_proto_google_type_date_proto_rawDescOnce.Do(func() {
-		file_proto_google_type_date_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_google_type_date_proto_rawDesc), len(file_proto_google_type_date_proto_rawDesc)))
+		file_proto_google_type_date_proto_rawDescData = protoimpl.X.CompressGZIP(
+			unsafe.Slice(
+				unsafe.StringData(file_proto_google_type_date_proto_rawDesc),
+				len(file_proto_google_type_date_proto_rawDesc),
+			),
+		)
 	})
 	return file_proto_google_type_date_proto_rawDescData
 }
 
-var file_proto_google_type_date_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_proto_google_type_date_proto_goTypes = []any{
-	(*Date)(nil), // 0: google.type.Date
-}
+var (
+	file_proto_google_type_date_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_proto_google_type_date_proto_goTypes  = []any{
+		(*Date)(nil), // 0: google.type.Date
+	}
+)
+
 var file_proto_google_type_date_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
@@ -159,7 +168,10 @@ func file_proto_google_type_date_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_google_type_date_proto_rawDesc), len(file_proto_google_type_date_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(
+				unsafe.StringData(file_proto_google_type_date_proto_rawDesc),
+				len(file_proto_google_type_date_proto_rawDesc),
+			),
 			NumEnums:      0,
 			NumMessages:   1,
 			NumExtensions: 0,

@@ -3,9 +3,11 @@ syntax = "proto3";
 package bank;
 
 import "proto/bank/type/account.proto";
+import "proto/bank/type/exchange.proto";
 
 option go_package = "github.com/raghav-gkmit/go-proto-buf/protogen/go/bank";
 
 service BankService {
   rpc GetCurrentBalance(bank.type.CurrentBalanceRequest) returns (bank.type.CurrentBalanceResponse);
+  rpc GetExchangeRate(bank.type.ExchangeRateRequest) returns (stream bank.type.ExchangeRateResponse);
 }

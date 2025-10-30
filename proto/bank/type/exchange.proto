@@ -1,0 +1,20 @@
+syntax="proto3";
+
+package bank.type;
+
+import "proto/google/type/date.proto";
+
+option go_package = "github.com/raghav-gkmit/go-proto-buf/protogen/go/bank/type";
+
+
+message ExchangeRateRequest {
+  string from_currency = 1 [json_name = "from_currency"];
+  string to_currency = 2 [json_name = "to_currency"];
+}
+
+message ExchangeRateResponse {
+  string from_currency = 1 [json_name = "from_currency"];
+  string to_currency = 2 [json_name = "to_currency"];
+  double rate = 3 [json_name = "rate"];
+  google.type.Date last_updated_date = 4 [json_name = "last_updated"];
+}
