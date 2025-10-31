@@ -20,8 +20,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	BankService_GetCurrentBalance_FullMethodName = "/bank.BankService/GetCurrentBalance"
-	BankService_GetExchangeRate_FullMethodName   = "/bank.BankService/GetExchangeRate"
+	BankService_GetCurrentBalance_FullMethodName    = "/bank.BankService/GetCurrentBalance"
+	BankService_GetExchangeRate_FullMethodName      = "/bank.BankService/GetExchangeRate"
+	BankService_SummarizeTransaction_FullMethodName = "/bank.BankService/SummarizeTransaction"
 )
 
 // BankServiceClient is the client API for BankService service.
@@ -30,6 +31,7 @@ const (
 type BankServiceClient interface {
 	GetCurrentBalance(ctx context.Context, in *_type.CurrentBalanceRequest, opts ...grpc.CallOption) (*_type.CurrentBalanceResponse, error)
 	GetExchangeRate(ctx context.Context, in *_type.ExchangeRateRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[_type.ExchangeRateResponse], error)
+	SummarizeTransaction(ctx context.Context, in *_type.Transaction, opts ...grpc.CallOption) (grpc.ServerStreamingClient[_type.TransactionSummary], error)
 }
 
 type bankServiceClient struct {
@@ -69,12 +71,32 @@ func (c *bankServiceClient) GetExchangeRate(ctx context.Context, in *_type.Excha
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type BankService_GetExchangeRateClient = grpc.ServerStreamingClient[_type.ExchangeRateResponse]
 
+func (c *bankServiceClient) SummarizeTransaction(ctx context.Context, in *_type.Transaction, opts ...grpc.CallOption) (grpc.ServerStreamingClient[_type.TransactionSummary], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &BankService_ServiceDesc.Streams[1], BankService_SummarizeTransaction_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[_type.Transaction, _type.TransactionSummary]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type BankService_SummarizeTransactionClient = grpc.ServerStreamingClient[_type.TransactionSummary]
+
 // BankServiceServer is the server API for BankService service.
 // All implementations must embed UnimplementedBankServiceServer
 // for forward compatibility.
 type BankServiceServer interface {
 	GetCurrentBalance(context.Context, *_type.CurrentBalanceRequest) (*_type.CurrentBalanceResponse, error)
 	GetExchangeRate(*_type.ExchangeRateRequest, grpc.ServerStreamingServer[_type.ExchangeRateResponse]) error
+	SummarizeTransaction(*_type.Transaction, grpc.ServerStreamingServer[_type.TransactionSummary]) error
 	mustEmbedUnimplementedBankServiceServer()
 }
 
@@ -90,6 +112,9 @@ func (UnimplementedBankServiceServer) GetCurrentBalance(context.Context, *_type.
 }
 func (UnimplementedBankServiceServer) GetExchangeRate(*_type.ExchangeRateRequest, grpc.ServerStreamingServer[_type.ExchangeRateResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method GetExchangeRate not implemented")
+}
+func (UnimplementedBankServiceServer) SummarizeTransaction(*_type.Transaction, grpc.ServerStreamingServer[_type.TransactionSummary]) error {
+	return status.Errorf(codes.Unimplemented, "method SummarizeTransaction not implemented")
 }
 func (UnimplementedBankServiceServer) mustEmbedUnimplementedBankServiceServer() {}
 func (UnimplementedBankServiceServer) testEmbeddedByValue()                     {}
@@ -141,6 +166,17 @@ func _BankService_GetExchangeRate_Handler(srv interface{}, stream grpc.ServerStr
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type BankService_GetExchangeRateServer = grpc.ServerStreamingServer[_type.ExchangeRateResponse]
 
+func _BankService_SummarizeTransaction_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(_type.Transaction)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BankServiceServer).SummarizeTransaction(m, &grpc.GenericServerStream[_type.Transaction, _type.TransactionSummary]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type BankService_SummarizeTransactionServer = grpc.ServerStreamingServer[_type.TransactionSummary]
+
 // BankService_ServiceDesc is the grpc.ServiceDesc for BankService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -157,6 +193,11 @@ var BankService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetExchangeRate",
 			Handler:       _BankService_GetExchangeRate_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "SummarizeTransaction",
+			Handler:       _BankService_SummarizeTransaction_Handler,
 			ServerStreams: true,
 		},
 	},

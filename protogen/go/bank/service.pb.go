@@ -25,24 +25,29 @@ var File_proto_bank_service_proto protoreflect.FileDescriptor
 
 const file_proto_bank_service_proto_rawDesc = "" +
 	"\n" +
-	"\x18proto/bank/service.proto\x12\x04bank\x1a\x1dproto/bank/type/account.proto\x1a\x1eproto/bank/type/exchange.proto2\xbd\x01\n" +
+	"\x18proto/bank/service.proto\x12\x04bank\x1a\x1dproto/bank/type/account.proto\x1a\x1eproto/bank/type/exchange.proto\x1a!proto/bank/type/transaction.proto2\x8e\x02\n" +
 	"\vBankService\x12X\n" +
 	"\x11GetCurrentBalance\x12 .bank.type.CurrentBalanceRequest\x1a!.bank.type.CurrentBalanceResponse\x12T\n" +
-	"\x0fGetExchangeRate\x12\x1e.bank.type.ExchangeRateRequest\x1a\x1f.bank.type.ExchangeRateResponse0\x01B7Z5github.com/raghav-gkmit/go-proto-buf/protogen/go/bankb\x06proto3"
+	"\x0fGetExchangeRate\x12\x1e.bank.type.ExchangeRateRequest\x1a\x1f.bank.type.ExchangeRateResponse0\x01\x12O\n" +
+	"\x14SummarizeTransaction\x12\x16.bank.type.Transaction\x1a\x1d.bank.type.TransactionSummary0\x01B7Z5github.com/raghav-gkmit/go-proto-buf/protogen/go/bankb\x06proto3"
 
 var file_proto_bank_service_proto_goTypes = []any{
 	(*_type.CurrentBalanceRequest)(nil),  // 0: bank.type.CurrentBalanceRequest
 	(*_type.ExchangeRateRequest)(nil),    // 1: bank.type.ExchangeRateRequest
-	(*_type.CurrentBalanceResponse)(nil), // 2: bank.type.CurrentBalanceResponse
-	(*_type.ExchangeRateResponse)(nil),   // 3: bank.type.ExchangeRateResponse
+	(*_type.Transaction)(nil),            // 2: bank.type.Transaction
+	(*_type.CurrentBalanceResponse)(nil), // 3: bank.type.CurrentBalanceResponse
+	(*_type.ExchangeRateResponse)(nil),   // 4: bank.type.ExchangeRateResponse
+	(*_type.TransactionSummary)(nil),     // 5: bank.type.TransactionSummary
 }
 var file_proto_bank_service_proto_depIdxs = []int32{
 	0, // 0: bank.BankService.GetCurrentBalance:input_type -> bank.type.CurrentBalanceRequest
 	1, // 1: bank.BankService.GetExchangeRate:input_type -> bank.type.ExchangeRateRequest
-	2, // 2: bank.BankService.GetCurrentBalance:output_type -> bank.type.CurrentBalanceResponse
-	3, // 3: bank.BankService.GetExchangeRate:output_type -> bank.type.ExchangeRateResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	2, // 2: bank.BankService.SummarizeTransaction:input_type -> bank.type.Transaction
+	3, // 3: bank.BankService.GetCurrentBalance:output_type -> bank.type.CurrentBalanceResponse
+	4, // 4: bank.BankService.GetExchangeRate:output_type -> bank.type.ExchangeRateResponse
+	5, // 5: bank.BankService.SummarizeTransaction:output_type -> bank.type.TransactionSummary
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
