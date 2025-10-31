@@ -29,7 +29,7 @@ const file_proto_bank_service_proto_rawDesc = "" +
 	"\vBankService\x12X\n" +
 	"\x11GetCurrentBalance\x12 .bank.type.CurrentBalanceRequest\x1a!.bank.type.CurrentBalanceResponse\x12T\n" +
 	"\x0fGetExchangeRate\x12\x1e.bank.type.ExchangeRateRequest\x1a\x1f.bank.type.ExchangeRateResponse0\x01\x12O\n" +
-	"\x14SummarizeTransaction\x12\x16.bank.type.Transaction\x1a\x1d.bank.type.TransactionSummary0\x01B7Z5github.com/raghav-gkmit/go-proto-buf/protogen/go/bankb\x06proto3"
+	"\x14SummarizeTransaction\x12\x16.bank.type.Transaction\x1a\x1d.bank.type.TransactionSummary(\x01B7Z5github.com/raghav-gkmit/go-proto-buf/protogen/go/bankb\x06proto3"
 
 var file_proto_bank_service_proto_goTypes = []any{
 	(*_type.CurrentBalanceRequest)(nil),  // 0: bank.type.CurrentBalanceRequest
