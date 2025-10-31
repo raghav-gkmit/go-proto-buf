@@ -1,0 +1,23 @@
+syntax="proto3";
+
+package bank.type;
+
+import "proto/google/type/date.proto";
+
+option go_package = "github.com/raghav-gkmit/go-proto-buf/protogen/go/bank/type";
+
+
+enum TransactionType {
+  TRANSACTION_TYPE_UNSPECIFIED = 0;
+  TRANSACTION_TYPE_DEBIT = 1;
+  TRANSACTION_TYPE_CREDIT = 2;
+}
+
+
+
+message Transaction {
+  string account_id = 2 [json_name = "account_id"];
+  double amount = 3 [json_name = "amount"];
+  TransactionType transaction_type = 4 [json_name = "transaction_type"];
+  google.type.Date transaction_date = 5 [json_name = "transaction_date"];
+}
