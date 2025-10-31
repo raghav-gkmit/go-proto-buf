@@ -14,10 +14,16 @@ enum TransactionType {
 }
 
 
-
 message Transaction {
-  string account_id = 2 [json_name = "account_id"];
+  string account_number = 1 [json_name = "account_number"];
+  TransactionType type = 2 [json_name = "type"];
   double amount = 3 [json_name = "amount"];
-  TransactionType transaction_type = 4 [json_name = "transaction_type"];
-  google.type.Date transaction_date = 5 [json_name = "transaction_date"];
+  google.type.Date transaction_date = 4 [json_name = "transaction_date"];
 }
+
+message TransactionSummary {
+  string account_number = 1 [json_name = "account_number"];
+  double total_debit = 2 [json_name = "total_debit"];
+  double total_credit = 3 [json_name = "total_credit"];
+}
+
